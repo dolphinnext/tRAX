@@ -47,7 +47,7 @@ def wrapbowtie2(bowtiedb, unpaired, outfile, scriptdir, trnafile, maxmaps = MAXM
     localmode = " "
     if local:
         localmode = " --local "
-    bowtiecommand = program+localmode+' -x '+bowtiedb+' -k '+str(maxmaps)+' --very-sensitive --ignore-quals --np 5 --reorder -p '+str(numcores)+' --un '+outfile+'.unmapped.fastq '+' -U '+unpaired+' '+outfile+'.bow 2>&1'
+    bowtiecommand = program+localmode+' -x '+bowtiedb+' -k '+str(maxmaps)+' --very-sensitive --ignore-quals --np 5 --reorder -p '+str(numcores)+' --un '+outfile+'.unmapped.fastq '+' -U '+unpaired+' '+outfile+'.tmp 2>&1 && grep -v Warning '+outfile+'.tmp > '+outfile+'.bow '
 
     #print >>sys.stderr, bowtiecommand
     temploc = os.path.basename(outfile)
