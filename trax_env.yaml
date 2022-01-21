@@ -23,3 +23,4 @@ dependencies:
   - r-ggrepel=0.8.2
   - r-reshape2=1.4.4
   - zsh
+  - pandaseq=2.11
