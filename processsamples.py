@@ -199,8 +199,8 @@ def mapsamples(samplefile, trnainfo,expinfo, lazyremap, bamdir = "./",  cores = 
     mapreads.testmain(samplefile=samplefile, trnafile=trnainfo.trnatable,bowtiedb=trnainfo.bowtiedb, bamdir = bamdir, otherseqs = trnainfo.otherseqs,logfile=expinfo.maplog,mapfile=expinfo.mapinfo,trnamapfile = expinfo.trnamapfile,lazy=lazyremap, cores = cores,minnontrnasize = minnontrnasize, local = local)
 def countfeatures(samplefile, trnainfo,expinfo, ensgtf, bedfiles,  bamdir = "./", cores = 8):
     countreads.testmain(samplefile=samplefile,ensemblgtf=ensgtf,maturetrnas=[trnainfo.maturetrnas], bamdir = bamdir, otherseqs = trnainfo.otherseqs,trnaloci=[trnainfo.locifile],removepseudo=True,genetypefile=expinfo.genetypes,trnatable=trnainfo.trnatable,countfile=expinfo.genecounts,bedfile=bedfiles, trnacounts = expinfo.trnacounts,trnaends = expinfo.trnaendfile,trnauniquecounts = expinfo.trnauniquefile,nofrag=nofrag, cores = cores)
-    runrscript(scriptdir+"/pcareadcounts.R",expinfo.normalizedcounts,samplefile,expinfo.pcaplot)
-    runrscript(scriptdir+"/pcareadcounts.R",expinfo.trnacounts,samplefile,expinfo.pcatrnaplot)
+    #runrscript(scriptdir+"/pcareadcounts.R",expinfo.normalizedcounts,samplefile,expinfo.pcaplot)
+    #runrscript(scriptdir+"/pcareadcounts.R",expinfo.trnacounts,samplefile,expinfo.pcatrnaplot)
 
 def counttypes(samplefile, trnainfo,expinfo, ensgtf, bedfiles, bamdir = "./",  ignoresizefactors = False, countfrags = False, bamnofeature = False, cores = 8):
     if not ignoresizefactors:
@@ -521,15 +521,14 @@ runrscript(scriptdir+"/featuretypes.R",expinfo.trnamapfile,expinfo.trnamapplot)
 #print >>sys.stderr, "Counting Read Types"
 #counttypes(samplefilename, trnainfo,expinfo, ensgtf, bedfiles, ignoresizefactors = nosizefactors)
 
-if maponly:
-    sys.exit()
 #Count the reads for DEseq2 and scatter plots
 print >>sys.stderr, "Counting Reads"
 countfeatures(samplefilename, trnainfo,expinfo, ensgtf, bedfiles, bamdir = bamdir,  cores = cores)
 #Create a plot of mapped reads                                
 print >>sys.stderr, "Analyzing counts"
 
-
+if maponly:
+    sys.exit()
 
 #Analyze counts and create scatter plots if pair file is provided
 if pairfile:
