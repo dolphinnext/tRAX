@@ -24,3 +24,4 @@ dependencies:
   - r-reshape2=1.4.4
   - zsh
   - pandaseq=2.11
+  - seqtk=1.3
