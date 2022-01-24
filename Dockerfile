@@ -18,7 +18,7 @@ RUN wget --quiet https://repo.anaconda.com/miniconda/Miniconda3-4.5.11-Linux-x86
     
 # configure image 
 RUN apt-get -y update 
-#RUN apt-get -y install software-properties-common build-essential
+#RUN apt-get -y install software-properties-common build-essential bc
 #RUN apt-get -y update
 
 RUN apt-get update && apt-get install -y unzip 
